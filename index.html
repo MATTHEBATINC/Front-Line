@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>Front Line Online</title><style>
+:root{--bg:#12150f;--fg:#e9e6d8;--ac:#d8b04a;--in:env(safe-area-inset-top,0px);--ib:env(safe-area-inset-bottom,0px);--il:env(safe-area-inset-left,0px);--ir:env(safe-area-inset-right,0px)}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font:600 15px/1.3 "Trebuchet MS",system-ui,sans-serif;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{position:fixed;inset:0}
+.h{position:fixed;pointer-events:none;text-shadow:0 1px 3px #000}
+#top{top:calc(var(--in) + 10px);left:calc(var(--il) + 14px);right:calc(var(--ir) + 14px);display:flex;justify-content:space-between;align-items:center;gap:10px}
+#bar{width:min(32vw,190px);height:12px;background:#0008;border:2px solid #fff5;border-radius:6px;overflow:hidden}
+#bar{position:relative}#hp{height:100%;width:100%}#arb{position:absolute;left:0;bottom:0;height:5px;background:#5ab4ff;width:0%}#ksb{font:700 12px system-ui,sans-serif;color:#ffd24a;text-shadow:0 1px 2px #000;margin-top:4px;white-space:nowrap}
+#am{font-size:18px;text-align:right;white-space:nowrap}#wv{text-align:center;font-size:14px}
+#sc{inset:0;background:radial-gradient(circle,transparent 30%,#000 31%);opacity:0}
+.dn{position:fixed;pointer-events:none;font:800 16px 'Trebuchet MS',sans-serif;color:#fff;text-shadow:0 1px 3px #000;animation:dn .8s ease-out forwards;z-index:4}.dn.hs{color:#ffd23a;font-size:22px}@keyframes dn{to{transform:translateY(-46px);opacity:0}}
+#hd{left:50%;top:50%;width:0;height:0;margin:-120px 0 0 -16px;border-left:16px solid transparent;border-right:16px solid transparent;border-bottom:30px solid #ff3b30;opacity:0;transform-origin:16px 120px}
+#kf{right:calc(var(--ir) + 14px);top:calc(var(--in) + 40px);text-align:right;font-size:14px;line-height:1.5}
+#fw{inset:0;background:#fff;opacity:0}#vg{inset:0;background:radial-gradient(ellipse,transparent 55%,#0008 100%)}
+#rd{left:calc(var(--il) + 14px);top:calc(var(--in) + 38px);width:110px;height:110px;border-radius:50%;background:#0006;border:2px solid #fff4}
+#cr{left:50%;top:50%;width:26px;height:26px;margin:-13px;border:2px solid #fffb;border-radius:50%}
+#cr:after{content:"";position:absolute;left:10px;top:10px;width:4px;height:4px;background:#fff;border-radius:50%}
+#hm{left:50%;top:50%;margin:-22px 0 0 -11px;font-size:30px;opacity:0}
+#dmg{inset:0;box-shadow:inset 0 0 140px 40px #b00;opacity:0}
+#msg{left:0;right:0;top:24%;text-align:center;font-size:30px;font-weight:800;letter-spacing:.06em;color:var(--ac);opacity:0}
+#net{left:calc(var(--il) + 14px);bottom:calc(var(--ib) + 8px);font-size:12px;opacity:.7}
+#skh{position:fixed;display:none;z-index:3;top:calc(var(--in) + 34px);left:50%;transform:translateX(-50%);font:700 13px 'Trebuchet MS',sans-serif;padding:5px 12px;border:2px solid #fff4;border-radius:4px;background:#0007;color:var(--fg)}
+#skh.on,#tbb{border-color:var(--ac)}#skh.on{color:var(--ac)}
+body.m #skh{display:block;pointer-events:auto}body:not(.m) #skh.show{display:block}
+#tbb{position:fixed;display:none;z-index:3;top:calc(var(--in) + 66px);left:50%;transform:translateX(-50%);font:700 13px 'Trebuchet MS',sans-serif;padding:5px 12px;border:2px solid #fff4;border-radius:4px;background:#0007;color:var(--fg)}
+body.m #tbb{display:block}
+#board{position:fixed;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%);display:none;gap:14px;background:#12150fe6;border:2px solid #fff3;border-radius:6px;padding:12px 16px;pointer-events:none;max-height:86vh;overflow:hidden}
+#board table{border-collapse:collapse;font-size:13px;min-width:200px}#board th{color:var(--ac);text-align:left;padding:2px 8px;font-size:14px}#board td{padding:1px 8px}#board td:nth-child(n+2){text-align:right}#board tr.me td{color:var(--ac)}#board .bt{opacity:.6}
+.t{display:none}body.m .t{display:block}body.m .b{display:flex}
+#lz,#rz{position:fixed;top:0;bottom:0;width:50%;z-index:1}#lz{left:0}#rz{right:0}
+#jb{position:fixed;display:none;width:100px;height:100px;border:2px solid #fff6;border-radius:50%;background:#fff1;pointer-events:none;z-index:3}
+#jk{position:absolute;left:28px;top:28px;width:44px;height:44px;border-radius:50%;background:#fffa}
+.b{position:fixed;z-index:2;width:78px;height:78px;border-radius:50%;background:#d8b04a99;border:2px solid #fffb;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+#f1{right:calc(var(--ir) + 26px);bottom:calc(var(--ib) + 30px)}
+#f2{left:calc(var(--il) + 22px);top:40%;width:62px;height:62px}
+#rb,#ab,#gb,#kb,#jp{width:56px;height:56px;background:#5a7a9a99}#gb{left:calc(var(--il) + 22px);top:calc(40% + 74px)}#kb{left:calc(var(--il) + 22px);top:calc(40% + 142px)}#jp{right:calc(var(--ir) + 120px);bottom:calc(var(--ib) + 24px)}#rb{right:calc(var(--ir) + 120px);bottom:calc(var(--ib) + 96px)}#ab{right:calc(var(--ir) + 34px);bottom:calc(var(--ib) + 124px)}
+#menu{position:fixed;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px;padding:20px;text-align:center;background:#12150ff2;overflow:auto}#menu>h1{margin-top:auto}#menu>.scr.on{margin-bottom:auto}
+#menu h1{margin:0;font:800 clamp(38px,9vw,70px)/1 Impact,"Arial Narrow",sans-serif;letter-spacing:.04em;color:var(--ac)}
+#menu p{margin:0;max-width:36em;opacity:.85}
+.scr{display:none;flex-direction:column;align-items:center;gap:12px;width:100%}.scr.on{display:flex}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:760px}
+.row button,.big,#nm{font:700 15px 'Trebuchet MS',system-ui,sans-serif;padding:8px 14px;border:2px solid #fff4;border-radius:4px;background:none;color:var(--fg);cursor:pointer;transition:transform .12s}
+.row button:hover,.big:hover{transform:translateY(-2px)}.row .on{border-color:var(--ac);color:var(--ac)}.row button small{display:block;font-size:11px;opacity:.75;font-weight:600}
+.big{font-weight:800;font-size:20px;padding:13px 36px;background:var(--ac);color:#1a1608;border:0}.big.alt{background:none;color:var(--fg);border:2px solid #fff4;font-size:16px;padding:9px 20px}.big.alt.on{border-color:var(--ac);color:var(--ac)}.big:disabled{opacity:.45;cursor:default;transform:none}
+#nm{cursor:text;text-align:center;width:min(260px,70vw);background:#0006;-webkit-user-select:text;user-select:text}
+.lbl{font-size:13px;opacity:.7;margin-top:4px}#lcd{font:800 34px Impact,"Arial Narrow",sans-serif;color:var(--ac)}#lnames{font-size:13px;opacity:.8;max-width:560px}
+#endboard{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}#endboard table{font-size:13px;border-collapse:collapse}#endboard th{color:var(--ac);text-align:left;padding:2px 8px}#endboard td{padding:1px 8px}#endboard td:nth-child(n+2){text-align:right}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<div class="h" id="top"><div id="lft"><div id="bar"><div id="hp"></div><div id="arb"></div></div><div id="ksb"></div></div><div id="wv"></div><div id="am"></div></div>
+<canvas class="h" id="rd" width="110" height="110"></canvas><div class="h" id="hd"></div><div class="h" id="kf"></div><div class="h" id="fw"></div><div class="h" id="vg"></div><div class="h" id="sc"></div><div class="h" id="cr"></div><div class="h" id="hm">✕</div><div class="h" id="dmg"></div><div class="h" id="msg"></div><div class="h" id="net"></div>
+<button id="skh"></button><button id="tbb">Scoreboard</button>
+<div id="board"></div>
+<div class="t" id="lz"></div><div class="t" id="rz"></div><div id="jb"><div id="jk"></div></div>
+<div class="t b" id="f1">Fire</div><div class="t b" id="f2">Fire</div><div class="t b" id="rb">Reload</div><div class="t b" id="ab">Aim</div><div class="t b" id="gb">Frag</div><div class="t b" id="kb">Knife</div><div class="t b" id="jp">Jump</div>
+<div id="menu"><h1 id="ti">Front Line</h1><p id="sub"></p>
+ <div class="scr on" id="s_name"><input id="nm" maxlength="14" placeholder="Your name" autocomplete="off"><div class="lbl">Graphics (Low is best for Chromebooks)</div><div class="row" id="gf"></div><button class="big" id="play">Play online</button><p id="cs"></p><p id="ctl"></p></div>
+ <div class="scr" id="s_lobby"><div id="lcd"></div><div id="lcount"></div><div id="lnames"></div><div class="lbl">Vote for the map</div><div class="row" id="mv"></div><button class="big alt" id="lskip"></button><p>If the lobby is not full when the timer ends, bots fill the empty slots and are replaced as players join.</p></div>
+ <div class="scr" id="s_load"><div class="row" id="lo"></div><div class="row" id="pk"></div><div class="row" id="eq"></div><button class="big" id="go">Deploy</button><button class="big alt" id="mskip"></button></div>
+ <div class="scr" id="s_end"><div id="endboard"></div><div class="lbl">Vote for the next map</div><div class="row" id="mv2"></div><div id="endcd" class="lbl"></div></div>
+ <div class="scr" id="s_pause"><button class="big" id="resume">Resume</button><button class="big alt" id="pskip"></button><p>The match keeps running while you are paused.</p></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="shared.js"></script><script src="render.js"></script><script src="client.js"></script>
+</body></html>
